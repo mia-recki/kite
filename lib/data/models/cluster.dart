@@ -18,8 +18,13 @@ class Cluster {
 
   String get title => getSection('title')!.text;
   String get category => getSection('category')!.text;
+  String? get location => getSection('location')?.text;
 
   Section? getSection(String name) => sections.where((s) => s.name == name).singleOrNull;
+
+  Map<Domain, List<Article>> get articlesByDomain => Map.fromEntries(
+    domains.map((domain) => MapEntry(domain, articles.where((article) => article.domain == domain.name).toList())),
+  );
 }
 
 typedef Domain = ({String name, String favicon});

@@ -29,10 +29,10 @@ class MainApp extends StatelessWidget {
       service: service,
       viewModel: viewModel,
       child: KiteThemeWrapper(
-        KiteThemeBrightness.light,
+        ThemeBrightness.light,
         builder:
             (context) => WidgetsApp(
-              textStyle: TextStyle(color: KiteTheme.of(context).textColor),
+              textStyle: KiteTheme.of(context).defaultTextStyle,
               //showSemanticsDebugger: true,
               shortcuts: appLevelShortcuts,
               actions: {
@@ -50,7 +50,14 @@ class MainApp extends StatelessWidget {
               },
               color: const Color(0xFFFFFFFF),
               debugShowCheckedModeBanner: false,
-              builder: (context, _) => const Focus(autofocus: true, child: HomePage()),
+              pageRouteBuilder:
+                  <T>(RouteSettings settings, WidgetBuilder builder) => PageRouteBuilder<T>(
+                    settings: settings,
+                    pageBuilder:
+                        (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
+                            builder(context),
+                  ),
+              home: const Focus(autofocus: true, child: HomePage()),
             ),
       ),
     );

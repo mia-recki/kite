@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'images.dart';
+import 'kite_logo.dart';
 
 class LoadingIndicator extends StatefulWidget {
   const LoadingIndicator({super.key});
@@ -25,6 +25,6 @@ class _LoadingIndicatorState extends State<LoadingIndicator> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    return SlideTransition(position: _offsetAnimation, child: kiteLogo);
+    return SlideTransition(position: _offsetAnimation, child: const KiteLogo());
   }
 }

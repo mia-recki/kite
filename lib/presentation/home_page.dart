@@ -3,15 +3,17 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 
 import '../data/kite_service.dart';
+import '../data/models/cluster.dart';
 import '../theme/components/dialog.dart';
-import '../theme/components/images.dart';
+import '../theme/components/kite_logo.dart';
 import '../theme/kite_theme.dart';
 import '../utils/screen_utils.dart';
 import '../view_model/actions/intents.dart';
 import '../view_model/categories_search_view_model.dart';
 import '../view_model/kite_view_model.dart';
 import '../view_model/provider/kite_provider.dart';
-import 'sidebar/categories_search_view.dart';
+import 'categories_search_view.dart';
+import 'cluster/cluster_view.dart';
 import 'sidebar/sidebar_view.dart';
 
 class HomePage extends StatelessWidget {
@@ -31,7 +33,10 @@ class HomePage extends StatelessWidget {
                 LayoutBuilder(
                   builder:
                       (context, constraints) => switch (constraints.maxWidth) {
+                        /// single page view for smaller screens
                         < screenSizeBreakpoint => const SidebarView(),
+
+                        /// split view for larger screens
                         _ => Row(
                           spacing: 16,
                           children: [
@@ -39,7 +44,18 @@ class HomePage extends StatelessWidget {
                               constraints: BoxConstraints(maxWidth: min(500, MediaQuery.sizeOf(context).width / 2)),
                               child: const SidebarView(),
                             ),
-                            Expanded(child: Center(child: kiteLogo)),
+                            Expanded(
+                              child: Center(
+                                child: ValueListenableBuilder(
+                                  valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryClusters,
+                                  builder:
+                                      (context, value, _) => switch (value.$1) {
+                                        final Cluster cluster => ClusterView(cluster, key: ValueKey(cluster)),
+                                        null => const KiteLogo(),
+                                      },
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       },
@@ -48,6 +64,7 @@ class HomePage extends StatelessWidget {
                   Positioned(
                     width: min(MediaQuery.sizeOf(context).shortestSide, screenSizeBreakpoint),
                     height: min(MediaQuery.sizeOf(context).shortestSide, screenSizeBreakpoint),
+                    bottom: MediaQuery.viewInsetsOf(context).bottom,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Dialog(

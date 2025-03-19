@@ -1,47 +1,83 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 
-enum KiteThemeBrightness {
-  dark(ThemeData(_Colors.kagiYellow, _Colors.black, _Colors.white, Color(0xFFD14900), _Colors.categoryColors)),
-  light(ThemeData(_Colors.kagiYellow, _Colors.white, _Colors.black, Color(0xFFD14900), _Colors.categoryColors));
-
-  const KiteThemeBrightness(this._data);
-
-  final ThemeData _data;
-}
+enum ThemeBrightness { dark, light }
 
 class ThemeData {
-  final Color kagiYellow;
-  final Color background;
-  final Color textColor;
-  final List<Color> categoryColors;
-  final Color error;
+  final ThemeBrightness brightness;
 
+  ThemeData(this.brightness);
+
+  Color get background => switch (brightness) {
+    ThemeBrightness.dark => const Color(0xFF1A202C),
+    ThemeBrightness.light => const Color(0xFFFFFFFF),
+  };
+
+  Color get textColor => switch (brightness) {
+    ThemeBrightness.dark => const Color(0xFFFFFFFF),
+    ThemeBrightness.light => const Color(0xFF1E2939),
+  };
+
+  final kagiYellow = const Color(0xFFF3B644);
+
+  Color get inlineUrlColor => switch (brightness) {
+    ThemeBrightness.dark => const Color(0xFF5B89FF),
+    ThemeBrightness.light => const Color(0xFF183FDC),
+  };
+
+  Color get didYouKnowBg => switch (brightness) {
+    ThemeBrightness.dark => const Color(0xFF2A3B5E),
+    ThemeBrightness.light => const Color(0xFFCED8FB),
+  };
+
+  Color get actionItemsBg => switch (brightness) {
+    ThemeBrightness.dark => const Color(0xFF2B411C),
+    ThemeBrightness.light => const Color(0xFFF1FAE8),
+  };
+
+  Color get textBoxBg => switch (brightness) {
+    ThemeBrightness.dark => const Color(0xFF364153),
+    ThemeBrightness.light => const Color(0xFFF3F4F6),
+  };
+
+  final talkingPointCircleBg = const Color(0xFFF9D9B8);
+  final talkingPointCircleText = const Color(0xFF1E2939);
+
+  Color get talkingPointsDivider => switch (brightness) {
+    ThemeBrightness.dark => const Color(0xFFD1D5DC),
+    ThemeBrightness.light => const Color(0xFF4A5565),
+  };
+
+  final categoryColors = const [
+    Color(0xFFCC3333),
+    Color(0xFFB85C2E),
+    Color(0xFF0077CC),
+    Color(0xFF666633),
+    Color(0xFF8822CC),
+    Color(0xFFB8288F),
+    Color(0xFFE60039),
+    Color(0xFF00855A),
+    Color(0xFFD14900),
+  ];
+
+  TextStyle get defaultTextStyle => TextStyle(color: textColor, fontSize: 17);
+
+  Color get error => categoryColors.first;
   TextStyle get errorText => TextStyle(color: error);
   TextStyle get searchBoxTextStyle => TextStyle(color: textColor, fontSize: 16);
+  TextStyle get headerTextStyle => TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 20);
   Color get focusedItemBackground => kagiYellow.withAlpha(60);
-
-  KiteThemeBrightness get brightness =>
-      this == KiteThemeBrightness.light._data ? KiteThemeBrightness.light : KiteThemeBrightness.dark;
-
-  const ThemeData(this.kagiYellow, this.background, this.textColor, this.error, this.categoryColors);
 
   @override
   bool operator ==(Object other) =>
-      other is ThemeData &&
-      kagiYellow == other.kagiYellow &&
-      background == other.background &&
-      textColor == other.textColor &&
-      error == other.error &&
-      const DeepCollectionEquality().equals(categoryColors, other.categoryColors);
+      other is ThemeData && background == other.background && textColor == other.textColor;
 
   @override
-  int get hashCode => Object.hash(kagiYellow, background, textColor, error, categoryColors);
+  int get hashCode => Object.hash(background, textColor);
 }
 
 class KiteThemeWrapper extends StatefulWidget {
   const KiteThemeWrapper(this.initialBrightness, {required this.builder, super.key});
-  final KiteThemeBrightness initialBrightness;
+  final ThemeBrightness initialBrightness;
   final WidgetBuilder builder;
 
   @override
@@ -49,7 +85,7 @@ class KiteThemeWrapper extends StatefulWidget {
 }
 
 class _KiteThemeWrapperState extends State<KiteThemeWrapper> {
-  late KiteThemeBrightness _brightness;
+  late ThemeBrightness _brightness;
 
   @override
   void initState() {
@@ -60,12 +96,12 @@ class _KiteThemeWrapperState extends State<KiteThemeWrapper> {
   @override
   Widget build(BuildContext context) {
     return KiteTheme(
-      _brightness._data,
+      ThemeData(_brightness),
       () => setState(
         () =>
             _brightness = switch (_brightness) {
-              KiteThemeBrightness.dark => KiteThemeBrightness.light,
-              KiteThemeBrightness.light => KiteThemeBrightness.dark,
+              ThemeBrightness.dark => ThemeBrightness.light,
+              ThemeBrightness.light => ThemeBrightness.dark,
             },
       ),
       child: Builder(builder: widget.builder),
@@ -85,23 +121,7 @@ class KiteTheme extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) => oldWidget is KiteTheme && data != oldWidget.data;
-}
-
-class _Colors {
-  static const kagiYellow = Color(0xFFF3B644);
 
   static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
-
-  static const categoryColors = [
-    Color(0xFFCC3333),
-    Color(0xFFB85C2E),
-    Color(0xFF0077CC),
-    Color(0xFF666633),
-    Color(0xFF8822CC),
-    Color(0xFFB8288F),
-    Color(0xFFE60039),
-    Color(0xFF00855A),
-    Color(0xFFD14900),
-  ];
 }

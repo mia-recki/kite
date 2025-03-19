@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
-import '../../../theme/components/images.dart';
+import '../../../theme/components/kite_logo.dart';
 import '../../../theme/kite_theme.dart';
 import '../../../view_model/actions/intents.dart';
 
@@ -15,9 +15,8 @@ class AppBar extends StatelessWidget {
       bottom: false,
       child: Row(
         children: [
-          ConstrainedBox(constraints: const BoxConstraints(maxWidth: 48, maxHeight: 48), child: kiteLogo),
+          const KiteLogo(width: 40, height: 40),
           const Text('Kite', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
-          // TODO: put somewhere else
           Expanded(child: Text(DateFormat('EEEE, MMMM dd').format(DateTime.now()), textAlign: TextAlign.center)),
           GestureDetector(
             onTap: Actions.handler(context, ToggleThemeIntent()),
@@ -25,7 +24,7 @@ class AppBar extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 24),
               child: SvgPicture.asset(
-                themeBrightnessAsset,
+                'assets/img/dark-theme.svg',
                 fit: BoxFit.fitHeight,
                 colorFilter: ColorFilter.mode(KiteTheme.of(context).textColor, BlendMode.srcIn),
                 height: 24,

@@ -46,25 +46,24 @@ class _CategoriesSearchViewState extends State<CategoriesSearchView> {
               child: ListView(
                 reverse: true,
                 children: [
-                  if (searchResult.$2 != null)
-                    ...(searchResult.$2!
-                        .mapIndexed<Widget>(
-                          (i, category) => GestureDetector(
-                            onTap: Actions.handler(context, SelectCategoryIntent(category)),
-                            child: Text(
-                              category.name,
-                              style:
-                                  i == searchResult.$1
-                                      ? theme.searchBoxTextStyle.copyWith(
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: theme.kagiYellow,
-                                        backgroundColor: theme.focusedItemBackground,
-                                      )
-                                      : theme.searchBoxTextStyle,
-                            ),
+                  ...(searchResult.$2
+                      .mapIndexed<Widget>(
+                        (i, category) => GestureDetector(
+                          onTap: Actions.handler(context, SelectCategoryIntent(category)),
+                          child: Text(
+                            category.name,
+                            style:
+                                i == searchResult.$1
+                                    ? theme.searchBoxTextStyle.copyWith(
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: theme.kagiYellow,
+                                      backgroundColor: theme.focusedItemBackground,
+                                    )
+                                    : theme.searchBoxTextStyle,
                           ),
-                        )
-                        .toList()),
+                        ),
+                      )
+                      .toList()),
                 ],
               ),
             );
