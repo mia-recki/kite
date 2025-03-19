@@ -15,6 +15,11 @@ class Cluster {
     required this.sections,
     required this.domains,
   });
+
+  String get title => getSection('title')!.text;
+  String get category => getSection('category')!.text;
+
+  Section? getSection(String name) => sections.where((s) => s.name == name).singleOrNull;
 }
 
 typedef Domain = ({String name, String favicon});
