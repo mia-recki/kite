@@ -16,7 +16,7 @@ class DummyClient implements ApiClient {
   }
 
   @override
-  Future<Result<Map<String, Object?>>> getClusters(String file) async {
+  Future<Result<Map<String, Object?>>> getCategoryContent(String file) async {
     try {
       return Success(jsonDecode(await rootBundle.loadString('assets/test/$file')));
     } catch (e) {

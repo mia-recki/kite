@@ -49,20 +49,22 @@ class MockApiClient extends _i1.Mock implements _i2.ApiClient {
           as _i3.Future<_i4.Result<Map<String, Object?>>>);
 
   @override
-  _i3.Future<_i4.Result<Map<String, Object?>>> getClusters(String? file) =>
+  _i3.Future<_i4.Result<Map<String, Object?>>> getCategoryContent(
+    String? file,
+  ) =>
       (super.noSuchMethod(
-            Invocation.method(#getClusters, [file]),
+            Invocation.method(#getCategoryContent, [file]),
             returnValue: _i3.Future<_i4.Result<Map<String, Object?>>>.value(
               _i5.dummyValue<_i4.Result<Map<String, Object?>>>(
                 this,
-                Invocation.method(#getClusters, [file]),
+                Invocation.method(#getCategoryContent, [file]),
               ),
             ),
             returnValueForMissingStub:
                 _i3.Future<_i4.Result<Map<String, Object?>>>.value(
                   _i5.dummyValue<_i4.Result<Map<String, Object?>>>(
                     this,
-                    Invocation.method(#getClusters, [file]),
+                    Invocation.method(#getCategoryContent, [file]),
                   ),
                 ),
           )

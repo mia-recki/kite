@@ -8,7 +8,7 @@ import 'dart:async' as _i4;
 import 'package:flutter/foundation.dart' as _i3;
 import 'package:kite/data/kite_service.dart' as _i2;
 import 'package:kite/data/models/category.dart' as _i5;
-import 'package:kite/data/models/cluster.dart' as _i6;
+import 'package:kite/data/models/content.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -62,11 +62,13 @@ class MockKiteService extends _i1.Mock implements _i2.KiteService {
           as _i4.Future<List<_i5.Category>?>);
 
   @override
-  _i4.Future<List<_i6.Cluster>?> getClustersFor(_i5.Category? category) =>
+  _i4.Future<List<_i6.Content>?> getCategoryContentFor(
+    _i5.Category? category,
+  ) =>
       (super.noSuchMethod(
-            Invocation.method(#getClustersFor, [category]),
-            returnValue: _i4.Future<List<_i6.Cluster>?>.value(),
-            returnValueForMissingStub: _i4.Future<List<_i6.Cluster>?>.value(),
+            Invocation.method(#getCategoryContentFor, [category]),
+            returnValue: _i4.Future<List<_i6.Content>?>.value(),
+            returnValueForMissingStub: _i4.Future<List<_i6.Content>?>.value(),
           )
-          as _i4.Future<List<_i6.Cluster>?>);
+          as _i4.Future<List<_i6.Content>?>);
 }

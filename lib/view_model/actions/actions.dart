@@ -61,14 +61,12 @@ class SelectPreviousClusterAction extends _KiteAction {
   }
 }
 
-class SelectClusterAction extends _KiteAction<SelectClusterIntent> {
-  SelectClusterAction(super.viewModel);
+class SelectContentAction extends _KiteAction<SelectContentIntent> {
+  SelectContentAction(super.viewModel);
 
   @override
-  Object? invoke(SelectClusterIntent intent) {
-    if (intent.cluster case final Cluster cluster) {
-      viewModel.selectCluster(cluster);
-    }
+  Object? invoke(SelectContentIntent intent) {
+    viewModel.selectContent(intent.content);
     return null;
   }
 }
@@ -77,7 +75,7 @@ class DeselectClusterAction extends _KiteAction<GoBackIntent> {
   DeselectClusterAction(super.viewModel);
   @override
   Object? invoke(GoBackIntent intent) {
-    viewModel.selectCluster(null);
+    viewModel.selectContent(null);
     return null;
   }
 }

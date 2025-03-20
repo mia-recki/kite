@@ -22,7 +22,7 @@ class ApiClient {
     return const Failure('Failed to load categories');
   }
 
-  Future<Result<Map<String, Object?>>> getClusters(String file) async {
+  Future<Result<Map<String, Object?>>> getCategoryContent(String file) async {
     final response = await _client.get(_fileEndpoint(file));
     if (response.statusCode == 200 && response.body.isNotEmpty) {
       return Success(jsonDecode(utf8.decode(response.bodyBytes)));

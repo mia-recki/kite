@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 
 import '../data/kite_service.dart';
 import '../data/models/cluster.dart';
+import '../data/models/content.dart';
+import '../data/models/history.dart';
+import '../theme/components/back_gesture_detector.dart';
 import '../theme/components/dialog.dart';
 import '../theme/components/kite_logo.dart';
 import '../theme/kite_theme.dart';
@@ -14,6 +17,7 @@ import '../view_model/kite_view_model.dart';
 import '../view_model/provider/kite_provider.dart';
 import 'categories_search_view.dart';
 import 'cluster/cluster_view.dart';
+import 'history/history_view.dart';
 import 'sidebar/sidebar_view.dart';
 
 class HomePage extends StatelessWidget {
@@ -31,45 +35,60 @@ class HomePage extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 LayoutBuilder(
-                  builder: (context, constraints) {
-                    final isSplitView = constraints.maxWidth > screenSizeBreakpoint;
-
-                    return switch (isSplitView) {
-                      /// single page view for smaller screens
-                      false => ValueListenableBuilder(
-                        valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryClusters,
-                        builder: (context, clusters, _) {
-                          return switch (clusters) {
-                            (final Cluster selectedCluster, _) => ClusterView(selectedCluster),
-                            _ => const SidebarView(),
-                          };
-                        },
-                      ),
-
-                      /// split view for larger screens
-                      true => Row(
-                        spacing: 16,
-                        children: [
-                          ConstrainedBox(
-                            constraints: BoxConstraints(maxWidth: min(500, MediaQuery.sizeOf(context).width / 5 * 2)),
-                            child: const SidebarView(),
-                          ),
-                          Expanded(
-                            child: Center(
-                              child: ValueListenableBuilder(
-                                valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryClusters,
-                                builder:
-                                    (context, value, _) => switch (value.$1) {
-                                      final Cluster cluster => ClusterView(cluster, key: ValueKey(cluster)),
-                                      null => const KiteLogo(),
+                  builder:
+                      (context, constraints) => switch (constraints.maxWidth > screenSizeBreakpoint) {
+                        /// single page view for smaller screens
+                        false => ValueListenableBuilder(
+                          valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryContent,
+                          builder: (context, clusters, _) {
+                            return ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: screenSizeBreakpoint),
+                              child: PopScope(
+                                canPop: false,
+                                onPopInvokedWithResult: (_, _) => Actions.handler(context, GoBackIntent())?.call(),
+                                child: BackGestureDetector(
+                                  onBackGesture: Actions.handler(context, GoBackIntent()),
+                                  child: switch (clusters) {
+                                    (final Content selectedContent, _) => switch (selectedContent) {
+                                      final Cluster cluster => ClusterView(cluster),
+                                      final History history => HistoryView(history),
+                                      _ => const SizedBox(),
                                     },
+                                    _ => const SidebarView(),
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+
+                        /// split view for larger screens
+                        true => Row(
+                          spacing: 16,
+                          children: [
+                            ConstrainedBox(
+                              constraints: BoxConstraints(maxWidth: min(500, MediaQuery.sizeOf(context).width / 5 * 2)),
+                              child: const SidebarView(),
+                            ),
+                            Expanded(
+                              child: Center(
+                                child: ValueListenableBuilder(
+                                  valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryContent,
+                                  builder:
+                                      (context, value, _) => ConstrainedBox(
+                                        constraints: const BoxConstraints(maxWidth: screenSizeBreakpoint),
+                                        child: switch (value.$1) {
+                                          final Cluster cluster => ClusterView(cluster, key: ValueKey(cluster)),
+                                          final History history => HistoryView(history),
+                                          _ => const KiteLogo(),
+                                        },
+                                      ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    };
-                  },
+                          ],
+                        ),
+                      },
                 ),
                 if (isShowingCategoriesList)
                   Positioned(

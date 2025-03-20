@@ -43,7 +43,7 @@ class MainApp extends StatelessWidget {
                 GoUpIntent: SelectPreviousClusterAction(viewModel),
                 ToggleCategoriesListIntent: ShowCategoriesListAction(viewModel),
                 SelectCategoryIntent: SelectCategoryAction(viewModel),
-                SelectClusterIntent: SelectClusterAction(viewModel),
+                SelectContentIntent: SelectContentAction(viewModel),
                 GoBackIntent: DeselectClusterAction(viewModel),
                 ToggleThemeIntent: CallbackAction<ToggleThemeIntent>(
                   onInvoke: (intent) => KiteTheme.toggleTheme(context),

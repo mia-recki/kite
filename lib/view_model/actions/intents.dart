@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../../data/models/category.dart';
-import '../../data/models/cluster.dart';
+import '../../data/models/content.dart';
 
 class GoUpIntent extends Intent {}
 
@@ -17,10 +17,10 @@ class SelectCategoryIntent extends Intent {
   const SelectCategoryIntent(this.category);
 }
 
-class SelectClusterIntent extends Intent {
-  final Cluster? cluster;
+class SelectContentIntent extends Intent {
+  final Content? content;
 
-  const SelectClusterIntent(this.cluster);
+  const SelectContentIntent(this.content);
 }
 
 class ToggleCategoriesListIntent extends Intent {}

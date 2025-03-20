@@ -1,7 +1,8 @@
 import '../../utils/string_utils.dart';
+import 'content.dart';
 
 /// A cluster of information about a news event
-class Cluster {
+class Cluster extends Content {
   final List<Perspective> perspectives;
   final List<Article> articles;
   final Quote? quote;

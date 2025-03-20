@@ -57,7 +57,7 @@ void main() {
         setUp(() async {
           when(client.get(any)).thenAnswer((_) async => Response('{"foo": "bar"}', 200));
 
-          result = await sut.getClusters('file.json');
+          result = await sut.getCategoryContent('file.json');
         });
 
         test(
@@ -73,7 +73,7 @@ void main() {
         setUp(() async {
           when(client.get(any)).thenAnswer((_) async => Response('error', 500));
 
-          result = await sut.getClusters('file.json');
+          result = await sut.getCategoryContent('file.json');
         });
 
         test(

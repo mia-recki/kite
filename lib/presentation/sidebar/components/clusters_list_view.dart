@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 import '../../../data/models/cluster.dart';
+import '../../../data/models/content.dart';
+import '../../../data/models/history.dart';
 import '../../../theme/components/loading_indicator.dart';
 import '../../../theme/kite_theme.dart';
 import '../../../view_model/actions/intents.dart';
@@ -14,7 +16,7 @@ class ClustersListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryClusters,
+      valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryContent,
       builder:
           (context, clusters, _) => switch (clusters) {
             (_, []) => Center(
@@ -24,14 +26,24 @@ class ClustersListView extends StatelessWidget {
                 style: KiteTheme.of(context).errorText,
               ),
             ),
-            (final Cluster? selectedCluster, final List<Cluster> clusters) => ListView(
+            (final Content? selectedContent, final List<Content> contentList) => ListView(
               padding: EdgeInsets.zero,
               children:
-                  clusters
+                  contentList
                       .map(
-                        (cluster) => GestureDetector(
-                          onTap: Actions.handler(context, SelectClusterIntent(cluster)),
-                          child: ClusterListTile(cluster, isSelected: cluster == selectedCluster),
+                        (content) => DecoratedBox(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: content == selectedContent ? KiteTheme.of(context).focusedItemBackground : null,
+                          ),
+                          child: GestureDetector(
+                            onTap: Actions.handler(context, SelectContentIntent(content)),
+                            child: switch (content) {
+                              final Cluster cluster => ClusterListTile(cluster, isSelected: cluster == selectedContent),
+                              History() => const Padding(padding: EdgeInsets.all(8), child: Text('Today')),
+                              _ => const SizedBox.shrink(),
+                            },
+                          ),
                         ),
                       )
                       .toList(),

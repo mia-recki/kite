@@ -1,16 +1,17 @@
 import '../../../utils/result.dart';
 import '../../exceptions.dart';
 import '../cluster.dart';
+import '../content.dart';
 
 class ClusterCodable {
-  static Result<List<Cluster>> decode(Map<String, Object?> json) => switch (json['clusters']) {
+  static Result<List<Content>> decode(Map<String, Object?> json) => switch (json['clusters']) {
     final List<dynamic> clusters => Success(
       clusters.map((clusterJson) => _decodeSingle(clusterJson as Map<String, Object?>)).nonNulls.toList(),
     ),
     _ => Failure(InvalidClusterListException(invalidJson: json)),
   };
 
-  static Cluster? _decodeSingle(Map<String, Object?> json) {
+  static Content? _decodeSingle(Map<String, Object?> json) {
     if (json case {
       'perspectives': final List<dynamic> perspectives,
       'articles': final List<dynamic> articles,

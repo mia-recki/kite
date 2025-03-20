@@ -39,6 +39,8 @@ class ThemeData {
     ThemeBrightness.light => const Color(0xFFF3F4F6),
   };
 
+  Color get timelineAccentColor => const Color(0xFF6285F0);
+
   final talkingPointCircleBg = const Color(0xFFF9D9B8);
   final talkingPointCircleText = const Color(0xFF1E2939);
 
