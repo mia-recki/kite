@@ -26,3 +26,5 @@ class SelectClusterIntent extends Intent {
 class ToggleCategoriesListIntent extends Intent {}
 
 class ToggleThemeIntent extends Intent {}
+
+class GoBackIntent extends Intent {}

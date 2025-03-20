@@ -1,12 +1,14 @@
 import 'package:flutter/widgets.dart';
 
 import '../../data/models/cluster.dart';
+import '../../theme/components/back_gesture_detector.dart';
 import '../../theme/components/category_view.dart';
 import '../../theme/components/header_text.dart';
 import '../../theme/components/rounded_colored_box.dart';
 import '../../theme/kite_theme.dart';
 import '../../utils/screen_utils.dart';
 import '../../utils/string_utils.dart';
+import '../../view_model/actions/intents.dart';
 import 'components/article_view.dart';
 import 'components/perspectives_view.dart';
 import 'components/quote_view.dart';
@@ -22,27 +24,32 @@ class ClusterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final sections = _buildSections(KiteTheme.of(context));
     // TODO: scroll on arrowUp/arrowDown
-    return ColoredBox(
-      color: KiteTheme.of(context).background,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: screenSizeBreakpoint),
-        child: ListView.separated(
-          itemCount: sections.length + 1,
-          padding: MediaQuery.viewPaddingOf(context) + const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
-          separatorBuilder: (context, index) => const SizedBox(height: 24),
-          itemBuilder: (context, index) {
-            // title
-            if (index == 0) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CategoryView(cluster.category),
-                  Text(cluster.title, maxLines: 4, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 24)),
-                ],
-              );
-            }
-            return sections[index - 1];
-          },
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (_, _) => Actions.handler(context, GoBackIntent())?.call(),
+      child: BackGestureDetector(
+        onBackGesture: Actions.handler(context, GoBackIntent()),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: screenSizeBreakpoint),
+          child: ListView.separated(
+            itemCount: sections.length + 1,
+            padding: MediaQuery.viewPaddingOf(context) + const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
+            separatorBuilder: (context, index) => const SizedBox(height: 24),
+            itemBuilder: (context, index) {
+              // category + title
+              if (index == 0) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CategoryView(cluster.category),
+                    Text(cluster.title, maxLines: 4, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 24)),
+                  ],
+                );
+              }
+              // dynamic sections
+              return sections[index - 1];
+            },
+          ),
         ),
       ),
     );

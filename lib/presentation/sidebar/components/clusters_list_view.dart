@@ -6,7 +6,6 @@ import '../../../theme/kite_theme.dart';
 import '../../../view_model/actions/intents.dart';
 import '../../../view_model/kite_view_model.dart';
 import '../../../view_model/provider/kite_provider.dart';
-import '../../cluster/cluster_view.dart';
 import 'cluster_list_tile.dart';
 
 class ClustersListView extends StatelessWidget {
@@ -31,13 +30,7 @@ class ClustersListView extends StatelessWidget {
                   clusters
                       .map(
                         (cluster) => GestureDetector(
-                          onTap: () {
-                            Actions.handler(context, SelectClusterIntent(cluster))?.call();
-                            // TODO: this should be done more elegantly
-                            Navigator.of(
-                              context,
-                            ).push(PageRouteBuilder(pageBuilder: (context, _, _) => ClusterView(cluster)));
-                          },
+                          onTap: Actions.handler(context, SelectClusterIntent(cluster)),
                           child: ClusterListTile(cluster, isSelected: cluster == selectedCluster),
                         ),
                       )

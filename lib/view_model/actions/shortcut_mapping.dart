@@ -9,5 +9,6 @@ final appLevelShortcuts = {
   const SingleActivator(LogicalKeyboardKey.keyK): GoUpIntent(),
   const SingleActivator(LogicalKeyboardKey.keyJ): GoDownIntent(),
   const SingleActivator(LogicalKeyboardKey.slash): ToggleCategoriesListIntent(),
-	const SingleActivator(LogicalKeyboardKey.keyT): ToggleThemeIntent()
+  const SingleActivator(LogicalKeyboardKey.keyT): ToggleThemeIntent(),
+  const SingleActivator(LogicalKeyboardKey.bracketLeft, meta: true): GoBackIntent(),
 };

@@ -20,14 +20,14 @@ class Dialog extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Flexible(child: child),
               Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.topRight,
                 child: Button(onTap: onClose, text: '\u2715', semanticsLabel: 'Close dialog'),
               ),
-              Flexible(child: child),
             ],
           ),
         ),

@@ -64,7 +64,7 @@ class KiteViewModel {
     }
   }
 
-  void selectCluster(Cluster cluster) {
+  void selectCluster(Cluster? cluster) {
     if (_currentCategoryClusters.value case (_, final List<Cluster> clusters)) {
       _currentCategoryClusters.value = (cluster, clusters);
     }

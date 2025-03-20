@@ -31,42 +31,53 @@ class HomePage extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 LayoutBuilder(
-                  builder:
-                      (context, constraints) => switch (constraints.maxWidth) {
-                        /// single page view for smaller screens
-                        < screenSizeBreakpoint => const SidebarView(),
+                  builder: (context, constraints) {
+                    final isSplitView = constraints.maxWidth > screenSizeBreakpoint;
 
-                        /// split view for larger screens
-                        _ => Row(
-                          spacing: 16,
-                          children: [
-                            ConstrainedBox(
-                              constraints: BoxConstraints(maxWidth: min(500, MediaQuery.sizeOf(context).width / 2)),
-                              child: const SidebarView(),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: ValueListenableBuilder(
-                                  valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryClusters,
-                                  builder:
-                                      (context, value, _) => switch (value.$1) {
-                                        final Cluster cluster => ClusterView(cluster, key: ValueKey(cluster)),
-                                        null => const KiteLogo(),
-                                      },
-                                ),
+                    return switch (isSplitView) {
+                      /// single page view for smaller screens
+                      false => ValueListenableBuilder(
+                        valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryClusters,
+                        builder: (context, clusters, _) {
+                          return switch (clusters) {
+                            (final Cluster selectedCluster, _) => ClusterView(selectedCluster),
+                            _ => const SidebarView(),
+                          };
+                        },
+                      ),
+
+                      /// split view for larger screens
+                      true => Row(
+                        spacing: 16,
+                        children: [
+                          ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: min(500, MediaQuery.sizeOf(context).width / 5 * 2)),
+                            child: const SidebarView(),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: ValueListenableBuilder(
+                                valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryClusters,
+                                builder:
+                                    (context, value, _) => switch (value.$1) {
+                                      final Cluster cluster => ClusterView(cluster, key: ValueKey(cluster)),
+                                      null => const KiteLogo(),
+                                    },
                               ),
                             ),
-                          ],
-                        ),
-                      },
+                          ),
+                        ],
+                      ),
+                    };
+                  },
                 ),
                 if (isShowingCategoriesList)
                   Positioned(
                     width: min(MediaQuery.sizeOf(context).shortestSide, screenSizeBreakpoint),
-                    height: min(MediaQuery.sizeOf(context).shortestSide, screenSizeBreakpoint),
                     bottom: MediaQuery.viewInsetsOf(context).bottom,
+                    top: MediaQuery.viewInsetsOf(context).top,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8),
                       child: Dialog(
                         onClose: Actions.handler(context, ToggleCategoriesListIntent()),
                         child: CategoriesSearchView(CategoriesSearchViewModel(KiteProvider.of<KiteService>(context))),

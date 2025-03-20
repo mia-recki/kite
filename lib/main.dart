@@ -44,11 +44,12 @@ class MainApp extends StatelessWidget {
                 ToggleCategoriesListIntent: ShowCategoriesListAction(viewModel),
                 SelectCategoryIntent: SelectCategoryAction(viewModel),
                 SelectClusterIntent: SelectClusterAction(viewModel),
+                GoBackIntent: DeselectClusterAction(viewModel),
                 ToggleThemeIntent: CallbackAction<ToggleThemeIntent>(
                   onInvoke: (intent) => KiteTheme.toggleTheme(context),
                 ),
               },
-              color: const Color(0xFFFFFFFF),
+              color: KiteTheme.white,
               debugShowCheckedModeBanner: false,
               pageRouteBuilder:
                   <T>(RouteSettings settings, WidgetBuilder builder) => PageRouteBuilder<T>(

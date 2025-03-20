@@ -73,6 +73,15 @@ class SelectClusterAction extends _KiteAction<SelectClusterIntent> {
   }
 }
 
+class DeselectClusterAction extends _KiteAction<GoBackIntent> {
+  DeselectClusterAction(super.viewModel);
+  @override
+  Object? invoke(GoBackIntent intent) {
+    viewModel.selectCluster(null);
+    return null;
+  }
+}
+
 class ShowCategoriesListAction extends _KiteAction<ToggleCategoriesListIntent> {
   ShowCategoriesListAction(super.viewModel);
 
