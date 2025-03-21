@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'data/api/dummy_client.dart';
+import 'data/api/api_client.dart';
 import 'data/kite_service.dart';
 import 'presentation/home_page.dart';
 import 'theme/kite_theme.dart';
@@ -13,7 +13,7 @@ import 'view_model/provider/kite_provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final service = KiteService(DummyClient());
+  final service = KiteService(ApiClient());
   final viewModel = KiteViewModel(service);
   runApp(MainApp(viewModel, service));
 }
@@ -33,7 +33,6 @@ class MainApp extends StatelessWidget {
         builder:
             (context) => WidgetsApp(
               textStyle: KiteTheme.of(context).defaultTextStyle,
-              //showSemanticsDebugger: true,
               shortcuts: appLevelShortcuts,
               actions: {
                 VoidCallbackIntent: VoidCallbackAction(),
@@ -51,13 +50,9 @@ class MainApp extends StatelessWidget {
               },
               color: KiteTheme.white,
               debugShowCheckedModeBanner: false,
-              pageRouteBuilder:
-                  <T>(RouteSettings settings, WidgetBuilder builder) => PageRouteBuilder<T>(
-                    settings: settings,
-                    pageBuilder:
-                        (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
-                            builder(context),
-                  ),
+              pageRouteBuilder: <T>(settings, builder) {
+                return PageRouteBuilder<T>(settings: settings, pageBuilder: (context, _, _) => builder(context));
+              },
               home: const Focus(autofocus: true, child: HomePage()),
             ),
       ),

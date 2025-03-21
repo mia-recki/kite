@@ -4,6 +4,7 @@ import '../../data/models/cluster.dart';
 import '../../theme/components/category_view.dart';
 import '../../theme/components/header_text.dart';
 import '../../theme/components/rounded_colored_box.dart';
+import '../../theme/components/section_view.dart';
 import '../../theme/kite_theme.dart';
 import '../../utils/string_utils.dart';
 import 'components/article_view.dart';
@@ -97,7 +98,7 @@ class ClusterView extends StatelessWidget {
               DefinedSection.travelAdvisory ||
               DefinedSection.technicalSpecifications => _ifPresent(
                 cluster.getSection(definedSection.key),
-                (section) => TextSectionView(definedSection.title, section.text),
+                (section) => SectionView(definedSection.title, child: Text(section.text)),
               ),
 
               DefinedSection.internationalReactions => _ifPresent(
@@ -133,7 +134,7 @@ class ClusterView extends StatelessWidget {
                 definedSection.getSection(cluster),
                 (userActionItems) => RoundedColoredBox(
                   color: theme.actionItemsBg,
-                  child: TextSectionView(definedSection.title, userActionItems.text),
+                  child: SectionView(definedSection.title, child: Text(userActionItems.text)),
                 ),
               ),
 
@@ -141,21 +142,11 @@ class ClusterView extends StatelessWidget {
                 definedSection.getSection(cluster),
                 (didYouKnowSection) => RoundedColoredBox(
                   color: theme.didYouKnowBg,
-                  child: TextSectionView(definedSection.title, didYouKnowSection.text),
+                  child: SectionView(definedSection.title, child: Text(didYouKnowSection.text)),
                 ),
               ),
             },
           )
           .whereType<Widget>()
           .toList();
-}
-
-class TextSectionView extends StatelessWidget {
-  const TextSectionView(this.title, this.content, {super.key});
-  final String title;
-  final String content;
-
-  @override
-  Widget build(BuildContext context) =>
-      Column(crossAxisAlignment: CrossAxisAlignment.start, spacing: 12, children: [HeaderText(title), Text(content)]);
 }

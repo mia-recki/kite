@@ -27,21 +27,6 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/test/bay.json
-    - assets/test/business.json
-    - assets/test/cryptocurrency.json
-    - assets/test/gaming.json
-    - assets/test/kite.json
-    - assets/test/onthisday.json
-    - assets/test/tech.json
-    - assets/test/serbia.json
-    - "assets/test/the netherlands.json"
-    - "assets/test/linux & oss.json"
-    - assets/test/science.json
-    - assets/test/sports.json
-    - assets/test/world.json
-    - assets/test/usa.json
-    - assets/test/romania.json
     - assets/img/kite.svg
     - assets/img/kite-dark.svg
     - assets/img/dark-theme.svg
