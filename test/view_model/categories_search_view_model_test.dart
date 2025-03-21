@@ -1,13 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kite/data/kite_service.dart';
 import 'package:kite/data/models/category.dart';
 import 'package:kite/view_model/categories_search_view_model.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-@GenerateNiceMocks([MockSpec<KiteService>()])
-import 'categories_search_view_model_test.mocks.dart';
+import 'kite_view_model_test.mocks.dart';
 
 class MockSearchResultListener with Mock {
   call();

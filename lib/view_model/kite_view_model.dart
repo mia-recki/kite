@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart' hide Category;
 import '../data/kite_service.dart';
 import '../data/models/category.dart';
 import '../data/models/content.dart';
-import '../data/models/history.dart';
 
 class KiteViewModel {
   final KiteService _service;

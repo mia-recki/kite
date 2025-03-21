@@ -13,8 +13,6 @@ class HistoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(history.events);
-    print(history.people);
     return ListView(
       children: [
         SectionView('Events', child: _TimelineView(history.events)),

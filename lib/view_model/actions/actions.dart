@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 
 import '../../data/models/category.dart';
-import '../../data/models/cluster.dart';
 import '../kite_view_model.dart';
 import 'intents.dart';
 
