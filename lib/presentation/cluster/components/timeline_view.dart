@@ -23,7 +23,6 @@ class TimelineView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     spacing: 16,
                     children: [
-                      // Timeline column (dot + line)
                       Column(
                         children: [
                           if (i != 0)
@@ -42,10 +41,12 @@ class TimelineView extends StatelessWidget {
                             ),
                         ],
                       ),
-
-                      SizedBox(
-                        width: 100,
-                        child: Text(e.$1, style: KiteTheme.of(context).headerTextStyle.copyWith(color: accentColor)),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: SizedBox(
+                          width: 100,
+                          child: Text(e.$1, style: KiteTheme.of(context).headerTextStyle.copyWith(color: accentColor)),
+                        ),
                       ),
                       // Content
                       Flexible(

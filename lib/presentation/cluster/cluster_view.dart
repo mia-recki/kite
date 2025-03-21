@@ -128,7 +128,10 @@ class ClusterView extends StatelessWidget {
 
               DefinedSection.timeline => _ifPresent(
                 definedSection.getPointsSection(cluster),
-                (timeline) => TimelineView(timeline.points.map((point) => point.splitOnFirst('::')).toList()),
+                (timeline) => SectionView(
+                  definedSection.title,
+                  child: TimelineView(timeline.points.map((point) => point.splitOnFirst('::')).toList()),
+                ),
               ),
 
               DefinedSection.sources => SourcesGrid(cluster.articlesByDomain),

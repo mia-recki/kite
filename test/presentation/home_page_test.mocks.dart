@@ -3,8 +3,6 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
-
 import 'package:flutter/foundation.dart' as _i2;
 import 'package:kite/data/models/category.dart' as _i4;
 import 'package:kite/data/models/content.dart' as _i5;
@@ -82,15 +80,6 @@ class MockKiteViewModel extends _i1.Mock implements _i3.KiteViewModel {
             ),
           )
           as _i2.ValueListenable<bool>);
-
-  @override
-  _i6.Future<List<_i4.Category>?> fetchCategories() =>
-      (super.noSuchMethod(
-            Invocation.method(#fetchCategories, []),
-            returnValue: _i6.Future<List<_i4.Category>?>.value(),
-            returnValueForMissingStub: _i6.Future<List<_i4.Category>?>.value(),
-          )
-          as _i6.Future<List<_i4.Category>?>);
 
   @override
   void selectNextCategory() => super.noSuchMethod(

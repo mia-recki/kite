@@ -4,8 +4,6 @@ import 'data/api/api_client.dart';
 import 'data/kite_service.dart';
 import 'presentation/home_page.dart';
 import 'theme/kite_theme.dart';
-import 'view_model/actions/actions.dart';
-import 'view_model/actions/intents.dart';
 import 'view_model/actions/shortcut_mapping.dart';
 import 'view_model/kite_view_model.dart';
 import 'view_model/provider/kite_provider.dart';
@@ -34,20 +32,7 @@ class MainApp extends StatelessWidget {
             (context) => WidgetsApp(
               textStyle: KiteTheme.of(context).defaultTextStyle,
               shortcuts: appLevelShortcuts,
-              actions: {
-                VoidCallbackIntent: VoidCallbackAction(),
-                GoRightIntent: SelectNextCategoryAction(viewModel),
-                GoLeftIntent: SelectPreviousCategoryAction(viewModel),
-                GoDownIntent: SelectNextClusterAction(viewModel),
-                GoUpIntent: SelectPreviousClusterAction(viewModel),
-                ToggleCategoriesListIntent: ShowCategoriesListAction(viewModel),
-                SelectCategoryIntent: SelectCategoryAction(viewModel),
-                SelectContentIntent: SelectContentAction(viewModel),
-                GoBackIntent: DeselectClusterAction(viewModel),
-                ToggleThemeIntent: CallbackAction<ToggleThemeIntent>(
-                  onInvoke: (intent) => KiteTheme.toggleTheme(context),
-                ),
-              },
+              actions: appLevelActions(context),
               color: KiteTheme.white,
               debugShowCheckedModeBanner: false,
               pageRouteBuilder: <T>(settings, builder) {

@@ -30,10 +30,6 @@ class KiteViewModel {
     _currentCategoryContent.value = (null, newContent);
   }
 
-  Future<List<Category>?> fetchCategories() async {
-    return await _service.getCategories();
-  }
-
   void selectNextCategory() => _selectCategory(1);
   void selectPreviousCategory() => _selectCategory(-1);
 
