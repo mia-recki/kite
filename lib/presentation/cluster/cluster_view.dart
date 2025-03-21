@@ -12,6 +12,7 @@ import 'components/perspectives_view.dart';
 import 'components/quote_view.dart';
 import 'components/sources_grid.dart';
 import 'components/talking_points_view.dart';
+import 'components/timeline_view.dart';
 import 'defined_section.dart';
 
 class ClusterView extends StatelessWidget {
@@ -125,8 +126,10 @@ class ClusterView extends StatelessWidget {
                 ),
               ),
 
-              // TODO: timeline
-              DefinedSection.timeline => const Placeholder(child: Text('timeline')),
+              DefinedSection.timeline => _ifPresent(
+                definedSection.getPointsSection(cluster),
+                (timeline) => TimelineView(timeline.points.map((point) => point.splitOnFirst('::')).toList()),
+              ),
 
               DefinedSection.sources => SourcesGrid(cluster.articlesByDomain),
 
