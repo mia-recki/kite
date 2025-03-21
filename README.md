@@ -23,9 +23,14 @@ Rationale for focusing on these features is that power users (which are most lik
 | `cmd-]`  | Unselect content (go back). |
 
 ## Demo
-![adaptive layout on iPadOS](demo_videos/ipad.mp4)
-![keyboard support on macos](demo_videos/macos.mp4)
-(keystrokes are displayed in the bottom right corner)
+
+https://github.com/user-attachments/assets/6c1fd7ee-2c2e-4363-9eb6-61ae2b3d6a61
+
+demonstrates layout changes as the app screen is resized
+
+https://github.com/user-attachments/assets/010e51e9-c5e7-4343-9b4f-4872d935c025
+
+demonstrates interacting with the app via keyboard (keystrokes are displayed in the bottom right corner)
 
 ## Features skipped for simplicity's sake
 - localization/internationalization (especially when it comes to semantic labels)
