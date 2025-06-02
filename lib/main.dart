@@ -28,18 +28,18 @@ class MainApp extends StatelessWidget {
       viewModel: viewModel,
       child: KiteThemeWrapper(
         ThemeBrightness.light,
-        builder:
-            (context) => WidgetsApp(
-              textStyle: KiteTheme.of(context).defaultTextStyle,
-              shortcuts: appLevelShortcuts,
-              actions: appLevelActions(context),
-              color: KiteTheme.white,
-              debugShowCheckedModeBanner: false,
-              pageRouteBuilder: <T>(settings, builder) {
-                return PageRouteBuilder<T>(settings: settings, pageBuilder: (context, _, _) => builder(context));
-              },
-              home: const Focus(autofocus: true, child: HomePage()),
-            ),
+        builder: (context) => WidgetsApp(
+          textStyle: KiteTheme.of(context).defaultTextStyle,
+          shortcuts: appLevelShortcuts,
+          actions: appLevelActions(context),
+          color: KiteTheme.white,
+          debugShowCheckedModeBanner: false,
+          pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
+            settings: settings,
+            pageBuilder: (context, _, _) => builder(context),
+          ),
+          home: const HomePage(),
+        ),
       ),
     );
   }

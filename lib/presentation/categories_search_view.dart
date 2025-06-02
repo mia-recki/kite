@@ -16,7 +16,7 @@ class CategoriesSearchView extends StatefulWidget {
 }
 
 class _CategoriesSearchViewState extends State<CategoriesSearchView> {
-  final _focusNode = FocusNode()..requestFocus();
+  final _focusNode = FocusNode(debugLabel: 'CategoriesSearchView')..requestFocus();
   final _controller = TextEditingController();
 
   @override
@@ -38,6 +38,7 @@ class _CategoriesSearchViewState extends State<CategoriesSearchView> {
   Widget build(BuildContext context) {
     final theme = KiteTheme.of(context);
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         ValueListenableBuilder(
           valueListenable: widget.viewModel.searchResults,
@@ -52,14 +53,13 @@ class _CategoriesSearchViewState extends State<CategoriesSearchView> {
                           onTap: Actions.handler(context, SelectCategoryIntent(category)),
                           child: Text(
                             category.name,
-                            style:
-                                i == searchResult.$1
-                                    ? theme.searchBoxTextStyle.copyWith(
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: theme.kagiYellow,
-                                      backgroundColor: theme.focusedItemBackground,
-                                    )
-                                    : theme.searchBoxTextStyle,
+                            style: i == searchResult.$1
+                                ? theme.searchBoxTextStyle.copyWith(
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: theme.kagiYellow,
+                                    backgroundColor: theme.focusedItemBackground,
+                                  )
+                                : theme.searchBoxTextStyle,
                           ),
                         ),
                       )
@@ -70,18 +70,19 @@ class _CategoriesSearchViewState extends State<CategoriesSearchView> {
           },
         ),
         Shortcuts(
-          shortcuts: Map.fromEntries(
-            // ignore app-level shortcuts inside of the text field
-            appLevelShortcuts.keys.map(
-              (activator) => MapEntry(activator, const DoNothingAndStopPropagationTextIntent()),
-            ),
-          )..addAll({
-            const SingleActivator(LogicalKeyboardKey.arrowUp): VoidCallbackIntent(widget.viewModel.focusNextResult),
-            const SingleActivator(LogicalKeyboardKey.arrowDown): VoidCallbackIntent(
-              widget.viewModel.focusPreviousResult,
-            ),
-            const SingleActivator(LogicalKeyboardKey.escape): ToggleCategoriesListIntent(),
-          }),
+          shortcuts:
+              Map.fromEntries(
+                // ignore app-level shortcuts inside of the text field
+                appLevelShortcuts.keys.map(
+                  (activator) => MapEntry(activator, const DoNothingAndStopPropagationTextIntent()),
+                ),
+              )..addAll({
+                const SingleActivator(LogicalKeyboardKey.arrowUp): VoidCallbackIntent(widget.viewModel.focusNextResult),
+                const SingleActivator(LogicalKeyboardKey.arrowDown): VoidCallbackIntent(
+                  widget.viewModel.focusPreviousResult,
+                ),
+                const SingleActivator(LogicalKeyboardKey.escape): const ToggleCategoriesListIntent(),
+              }),
           child: FocusScope(
             child: EditableText(
               controller: _controller,
@@ -89,11 +90,10 @@ class _CategoriesSearchViewState extends State<CategoriesSearchView> {
               style: theme.searchBoxTextStyle,
               cursorColor: theme.kagiYellow,
               backgroundCursorColor: theme.kagiYellow,
-              onSubmitted:
-                  (_) => Actions.invoke(
-                    context,
-                    SelectCategoryIntent(widget.viewModel.searchResults.value.focusedCategory),
-                  ),
+              onSubmitted: (_) => Actions.invoke(
+                context,
+                SelectCategoryIntent(widget.viewModel.searchResults.value.focusedCategory),
+              ),
             ),
           ),
         ),

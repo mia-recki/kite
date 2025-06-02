@@ -25,59 +25,62 @@ class HomePage extends StatelessWidget {
       color: theme.background,
       child: ValueListenableBuilder(
         valueListenable: KiteProvider.of<KiteViewModel>(context).showingCategoriesList,
-        builder:
-            (context, isShowingCategoriesList, _) => Stack(
-              alignment: Alignment.center,
-              children: [
-                LayoutBuilder(
-                  builder:
-                      (context, constraints) => switch (constraints.maxWidth > screenSizeBreakpoint) {
-                        /// single page view for smaller screens
-                        false => ValueListenableBuilder(
-                          valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryContent,
-                          builder: (context, clusters, _) {
-                            return switch (clusters) {
-                              (final Content selectedContent, _) => ContentView(selectedContent),
-                              _ => const SidebarView(),
-                            };
-                          },
-                        ),
-
-                        /// split view for larger screens
-                        true => Row(
-                          spacing: 16,
-                          children: [
-                            ConstrainedBox(
-                              constraints: BoxConstraints(maxWidth: min(500, MediaQuery.sizeOf(context).width / 5 * 2)),
-                              child: const SidebarView(),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: ValueListenableBuilder(
-                                  valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryContent,
-                                  builder: (context, value, _) => ContentView(value.$1),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      },
+        builder: (context, isShowingCategoriesList, _) => Stack(
+          alignment: Alignment.center,
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) => switch (constraints.maxWidth > screenSizeBreakpoint) {
+                /// single page view for smaller screens
+                false => ValueListenableBuilder(
+                  valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryContent,
+                  builder: (context, clusters, _) {
+                    return switch (clusters) {
+                      (final Content selectedContent, _) => ContentView(selectedContent),
+                      _ => const SidebarView(),
+                    };
+                  },
                 ),
-                if (isShowingCategoriesList)
-                  Positioned(
-                    width: min(MediaQuery.sizeOf(context).shortestSide, screenSizeBreakpoint),
-                    bottom: MediaQuery.viewInsetsOf(context).bottom,
-                    top: MediaQuery.viewInsetsOf(context).top,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Dialog(
-                        onClose: Actions.handler(context, ToggleCategoriesListIntent()),
-                        child: CategoriesSearchView(CategoriesSearchViewModel(KiteProvider.of<KiteService>(context))),
+
+                /// split view for larger screens
+                true => Row(
+                  spacing: 16,
+                  children: [
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: min(500, MediaQuery.sizeOf(context).width / 5 * 2)),
+                      child: const SidebarView(),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: ValueListenableBuilder(
+                          valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategoryContent,
+                          builder: (context, value, _) => ContentView(value.$1),
+                        ),
                       ),
                     ),
-                  ),
-              ],
+                  ],
+                ),
+              },
             ),
+            if (isShowingCategoriesList)
+              Positioned(
+                width: min(MediaQuery.sizeOf(context).shortestSide, screenSizeBreakpoint),
+                bottom: switch (MediaQuery.viewInsetsOf(context).bottom) {
+                  final softKeyboardHeight when softKeyboardHeight > 0 => softKeyboardHeight,
+                  _ => null,
+                },
+                height: MediaQuery.sizeOf(context).height / 2,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Dialog(
+                      onClose: Actions.handler(context, const ToggleCategoriesListIntent()),
+                      child: CategoriesSearchView(CategoriesSearchViewModel(KiteProvider.of<KiteService>(context))),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

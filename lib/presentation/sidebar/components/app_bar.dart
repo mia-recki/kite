@@ -19,7 +19,7 @@ class AppBar extends StatelessWidget {
           const Text('Kite', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
           Expanded(child: Text(DateFormat('EEEE, MMMM dd').format(DateTime.now()), textAlign: TextAlign.center)),
           GestureDetector(
-            onTap: Actions.handler(context, ToggleThemeIntent()),
+            onTap: Actions.handler(context, const ToggleThemeIntent()),
             behavior: HitTestBehavior.opaque,
             child: Padding(
               padding: const EdgeInsets.only(right: 24),

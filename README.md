@@ -5,7 +5,7 @@ A Flutter app for consuming [Kite](https://kite.kagi.com) news summaries.
 Runs on Android, iOS/iPadOS, macOS, and web (presumably other platforms as well, but not tested).
 
 ## Features
-- ⌨️ **full[^1] keyboard support** - never lift your hands from the keyboard!
+- ⌨️ **full keyboard support** - never lift your hands from the keyboard!
 - ✨ **adaptive layout** - adapts to any screen size, including foldables and tablets.
 - 🔆 **theme toggle** - easily switch between light and dark modes.
 - ⚙️ **no `material`/`cupertino` dependencies** - Focuses on platform-independent UI components.
@@ -20,7 +20,10 @@ Rationale for focusing on these features is that power users (which are most lik
 | `j`/`k`  | Select next/previous content in the list. |
 | `/`      | Toggle search for categories. |
 | `t`      | Toggle theme (light/dark). |
-| `cmd-]`  | Unselect content (go back). |
+| `cmd-]`/`alt-Left` | Unselect content (go back). |
+| arrow `Up`/`Down` | Scroll up/down in a cluster |
+| `g` | Scroll to top of a cluster |
+| `G` (`shift-g`) | Scroll to bottom of a cluster |
 
 ## Demo
 
@@ -34,7 +37,8 @@ demonstrates interacting with the app via keyboard (keystrokes are displayed in 
 
 ## Features skipped for simplicity's sake
 - localization/internationalization (especially when it comes to semantic labels)
-- accessibility accommodations past the basics
+    - no support for languages that are not written horizontally from left to right
+- accessibility accommodations past the very basics
 - storing any data locally, including:
     - user customization settings
     - caching most recent data for offline consumption
@@ -61,5 +65,3 @@ Since the functionality is currently essentially limited to displaying results o
     - it exposes `ValueListenable`s, which are consumed by various widgets to build the UI
     - its state is modified through [`Action`s](https://docs.flutter.dev/ui/interactivity/actions-and-shortcuts) (dispatched either by keyboard shortcuts or widget onTap callbacks)
 - `HomePage` builds the UI as a function of screen size
-
-[^1]: _technically true_ if you have been blessed by a very tall display that can preview the entire `ClusterView` without the need for scrolling; support for scrolling using keyboard is comming soon™

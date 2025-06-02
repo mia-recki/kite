@@ -15,32 +15,31 @@ class CurrentCategoryView extends StatelessWidget {
       top: false,
       child: ValueListenableBuilder(
         valueListenable: KiteProvider.of<KiteViewModel>(context).currentCategory,
-        builder:
-            (context, category, _) => switch (category) {
-              null => const SizedBox(),
-              final Category category => Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Button(
-                      onTap: Actions.handler(context, GoLeftIntent()),
-                      text: '<',
-                      semanticsLabel: 'Previous category',
-                    ),
-                    GestureDetector(
-                      onTap: Actions.handler(context, ToggleCategoriesListIntent()),
-                      child: Text(category.name),
-                    ),
-                    Button(
-                      onTap: Actions.handler(context, GoRightIntent()),
-                      text: '>',
-                      semanticsLabel: 'Next category',
-                    ),
-                  ],
+        builder: (context, category, _) => switch (category) {
+          null => const SizedBox(),
+          final Category category => Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Button(
+                  onTap: Actions.handler(context, const GoLeftIntent()),
+                  text: '<',
+                  semanticsLabel: 'Previous category',
                 ),
-              ),
-            },
+                GestureDetector(
+                  onTap: Actions.handler(context, const ToggleCategoriesListIntent()),
+                  child: Text(category.name),
+                ),
+                Button(
+                  onTap: Actions.handler(context, const GoRightIntent()),
+                  text: '>',
+                  semanticsLabel: 'Next category',
+                ),
+              ],
+            ),
+          ),
+        },
       ),
     );
   }

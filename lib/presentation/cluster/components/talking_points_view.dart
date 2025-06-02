@@ -21,7 +21,11 @@ class TalkingPointsView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               DefaultTextStyle(
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: KiteTheme.of(context).textColor),
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  color: KiteTheme.of(context).textColor,
+                ),
                 child: Row(
                   spacing: 16,
                   children: [
@@ -60,7 +64,9 @@ class _DashedDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
-      child: CustomPaint(painter: _DashedDividerPainter(dividerColor: KiteTheme.of(context).talkingPointsDivider)),
+      child: CustomPaint(
+        painter: _DashedDividerPainter(dividerColor: KiteTheme.of(context).talkingPointsDivider),
+      ),
     );
   }
 }
@@ -73,10 +79,9 @@ class _DashedDividerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = dividerColor
-          ..strokeWidth = 1;
+    final paint = Paint()
+      ..color = dividerColor
+      ..strokeWidth = 1;
 
     Path path = Path();
     path.moveTo(0, size.height / 2); // Start point

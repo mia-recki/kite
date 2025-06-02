@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,14 +8,22 @@ import '../provider/kite_provider.dart';
 import 'actions.dart';
 import 'intents.dart';
 
-final appLevelShortcuts = {
-  const SingleActivator(LogicalKeyboardKey.keyH): GoRightIntent(),
-  const SingleActivator(LogicalKeyboardKey.keyL): GoLeftIntent(),
-  const SingleActivator(LogicalKeyboardKey.keyK): GoUpIntent(),
-  const SingleActivator(LogicalKeyboardKey.keyJ): GoDownIntent(),
-  const SingleActivator(LogicalKeyboardKey.slash): ToggleCategoriesListIntent(),
-  const SingleActivator(LogicalKeyboardKey.keyT): ToggleThemeIntent(),
-  const SingleActivator(LogicalKeyboardKey.bracketLeft, meta: true): GoBackIntent(),
+const appLevelShortcuts = {
+  SingleActivator(LogicalKeyboardKey.keyH): GoRightIntent(),
+  SingleActivator(LogicalKeyboardKey.keyL): GoLeftIntent(),
+  SingleActivator(LogicalKeyboardKey.keyK): GoUpIntent(),
+  SingleActivator(LogicalKeyboardKey.keyJ): GoDownIntent(),
+  SingleActivator(LogicalKeyboardKey.slash): ToggleCategoriesListIntent(),
+  SingleActivator(LogicalKeyboardKey.keyT): ToggleThemeIntent(),
+  SingleActivator(LogicalKeyboardKey.bracketLeft, meta: true): GoBackIntent(),
+  SingleActivator(LogicalKeyboardKey.arrowLeft, alt: true): GoBackIntent(),
+  SingleActivator(LogicalKeyboardKey.escape): EscapeIntent(),
+  SingleActivator(LogicalKeyboardKey.arrowUp): ScrollUpIntent(),
+  SingleActivator(LogicalKeyboardKey.arrowDown): ScrollDownIntent(),
+  SingleActivator(LogicalKeyboardKey.keyG): ScrollToTopIntent(),
+  SingleActivator(LogicalKeyboardKey.keyG, shift: true): ScrollToBottomIntent(),
+
+  if (kDebugMode) SingleActivator(LogicalKeyboardKey.keyD): DebugIntent(),
 };
 
 Map<Type, Action> appLevelActions(BuildContext context) {
@@ -30,5 +39,13 @@ Map<Type, Action> appLevelActions(BuildContext context) {
     SelectContentIntent: SelectContentAction(viewModel),
     GoBackIntent: DeselectClusterAction(viewModel),
     ToggleThemeIntent: CallbackAction<ToggleThemeIntent>(onInvoke: (intent) => KiteTheme.toggleTheme(context)),
+
+    if (kDebugMode)
+      DebugIntent: CallbackAction(
+        onInvoke: (_) {
+          debugDumpFocusTree();
+          return null;
+        },
+      ),
   };
 }

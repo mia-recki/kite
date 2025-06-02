@@ -20,9 +20,9 @@ class ContentView extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: screenSizeBreakpoint),
       child: PopScope(
         canPop: false,
-        onPopInvokedWithResult: (_, _) => Actions.handler(context, GoBackIntent())?.call(),
+        onPopInvokedWithResult: (_, _) => Actions.handler(context, const GoBackIntent())?.call(),
         child: BackGestureDetector(
-          onBackGesture: Actions.handler(context, GoBackIntent()),
+          onBackGesture: Actions.handler(context, const GoBackIntent()),
           child: switch (content) {
             final Cluster cluster => ClusterView(cluster),
             final History history => HistoryView(history),

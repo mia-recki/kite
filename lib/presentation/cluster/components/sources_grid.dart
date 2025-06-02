@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../data/models/cluster.dart';
@@ -44,7 +43,13 @@ class _SourceView extends StatelessWidget {
               Row(
                 spacing: 8,
                 children: [
-                  CachedNetworkImage(imageUrl: domain.favicon, width: 16, height: 16),
+                  if (domain.favicon.isNotEmpty)
+                    Image.network(
+                      domain.favicon,
+                      width: 16,
+                      height: 16,
+                      webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                    ),
                   Flexible(child: Text(domain.name)),
                 ],
               ),
