@@ -17,18 +17,17 @@ class UrlView extends StatelessWidget {
       link: true,
       label: displayText,
       child: MouseHoverRegion(
-        builder:
-            (context, isHovering) => GestureDetector(
-              child: Text(
-                displayText,
-                style: TextStyle(
-                  color: theme.inlineUrlColor,
-                  decoration: isHovering ? TextDecoration.underline : null,
-                  decorationColor: theme.inlineUrlColor,
-                ),
-              ),
-              onTap: () => launchUrl(Uri.parse(url)),
+        builder: (context, isHovering) => GestureDetector(
+          onTap: () => launchUrl(Uri.parse(url)),
+          child: Text(
+            displayText,
+            style: TextStyle(
+              color: theme.inlineUrlColor,
+              decoration: isHovering ? TextDecoration.underline : null,
+              decorationColor: theme.inlineUrlColor,
             ),
+          ),
+        ),
       ),
     );
   }

@@ -4,7 +4,7 @@ import '../kite_theme.dart';
 
 class HeaderText extends StatelessWidget {
   const HeaderText(this.text, {super.key});
-	final String text;
+  final String text;
 
   @override
   Widget build(BuildContext context) {

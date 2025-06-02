@@ -100,11 +100,10 @@ class _KiteThemeWrapperState extends State<KiteThemeWrapper> {
     return KiteTheme(
       ThemeData(_brightness),
       () => setState(
-        () =>
-            _brightness = switch (_brightness) {
-              ThemeBrightness.dark => ThemeBrightness.light,
-              ThemeBrightness.light => ThemeBrightness.dark,
-            },
+        () => _brightness = switch (_brightness) {
+          ThemeBrightness.dark => ThemeBrightness.light,
+          ThemeBrightness.light => ThemeBrightness.dark,
+        },
       ),
       child: Builder(builder: widget.builder),
     );

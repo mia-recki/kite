@@ -26,8 +26,7 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
-  _FakeDateTime_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+  _FakeDateTime_0(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
 }
 
 /// A class which mocks [KiteService].
@@ -38,19 +37,14 @@ class MockKiteService extends _i1.Mock implements _i2.KiteService {
   _i3.ValueGetter<DateTime> get currentTime =>
       (super.noSuchMethod(
             Invocation.getter(#currentTime),
-            returnValue:
-                () => _FakeDateTime_0(this, Invocation.getter(#currentTime)),
-            returnValueForMissingStub:
-                () => _FakeDateTime_0(this, Invocation.getter(#currentTime)),
+            returnValue: () => _FakeDateTime_0(this, Invocation.getter(#currentTime)),
+            returnValueForMissingStub: () => _FakeDateTime_0(this, Invocation.getter(#currentTime)),
           )
           as _i3.ValueGetter<DateTime>);
 
   @override
   set currentTime(_i3.ValueGetter<DateTime>? _currentTime) =>
-      super.noSuchMethod(
-        Invocation.setter(#currentTime, _currentTime),
-        returnValueForMissingStub: null,
-      );
+      super.noSuchMethod(Invocation.setter(#currentTime, _currentTime), returnValueForMissingStub: null);
 
   @override
   _i4.Future<List<_i5.Category>?> getCategories() =>
@@ -62,9 +56,7 @@ class MockKiteService extends _i1.Mock implements _i2.KiteService {
           as _i4.Future<List<_i5.Category>?>);
 
   @override
-  _i4.Future<List<_i6.Content>?> getCategoryContentFor(
-    _i5.Category? category,
-  ) =>
+  _i4.Future<List<_i6.Content>?> getCategoryContentFor(_i5.Category? category) =>
       (super.noSuchMethod(
             Invocation.method(#getCategoryContentFor, [category]),
             returnValue: _i4.Future<List<_i6.Content>?>.value(),

@@ -15,59 +15,64 @@ class TimelineView extends StatelessWidget {
   Widget build(BuildContext context) {
     final accentColor = KiteTheme.of(context).timelineAccentColor;
     return Column(
-      children:
-          items
-              .mapIndexed(
-                (i, e) => IntrinsicHeight(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    spacing: 16,
+      children: items
+          .mapIndexed(
+            (i, e) => IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 16,
+                children: [
+                  Column(
                     children: [
-                      Column(
-                        children: [
-                          if (i != 0)
-                            SizedBox(height: 8, child: ColoredBox(color: accentColor, child: const SizedBox(width: 3))),
-                          Container(
-                            height: 12,
-                            width: 12,
-                            decoration: BoxDecoration(color: accentColor, shape: BoxShape.circle),
+                      if (i != 0)
+                        SizedBox(
+                          height: 8,
+                          child: ColoredBox(color: accentColor, child: const SizedBox(width: 3)),
+                        ),
+                      Container(
+                        height: 12,
+                        width: 12,
+                        decoration: BoxDecoration(color: accentColor, shape: BoxShape.circle),
+                      ),
+                      if (i != items.length - 1)
+                        Expanded(
+                          child: ColoredBox(
+                            color: KiteTheme.of(context).timelineAccentColor,
+                            child: const SizedBox(width: 3),
                           ),
-                          if (i != items.length - 1)
-                            Expanded(
-                              child: ColoredBox(
-                                color: KiteTheme.of(context).timelineAccentColor,
-                                child: const SizedBox(width: 3),
-                              ),
-                            ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: SizedBox(
-                          width: 100,
-                          child: Text(e.$1, style: KiteTheme.of(context).headerTextStyle.copyWith(color: accentColor)),
                         ),
-                      ),
-                      // Content
-                      Flexible(
-                        child: Html(
-                          data: e.$2,
-                          onLinkTap: (src, _, _) {
-                            if (src != null) launchUrl(Uri.parse(src));
-                          },
-                          style: {
-                            'a': Style(
-                              textDecoration: TextDecoration.underline,
-                              color: KiteTheme.of(context).textColor,
-                            ),
-                          },
-                        ),
-                      ),
                     ],
                   ),
-                ),
-              )
-              .toList(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: SizedBox(
+                      width: 100,
+                      child: Text(
+                        e.$1,
+                        style: KiteTheme.of(context).headerTextStyle.copyWith(color: accentColor),
+                      ),
+                    ),
+                  ),
+                  // Content
+                  Flexible(
+                    child: Html(
+                      data: e.$2,
+                      onLinkTap: (src, _, _) {
+                        if (src != null) launchUrl(Uri.parse(src));
+                      },
+                      style: {
+                        'a': Style(
+                          textDecoration: TextDecoration.underline,
+                          color: KiteTheme.of(context).textColor,
+                        ),
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 }

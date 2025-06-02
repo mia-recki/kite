@@ -8,6 +8,11 @@ class SidebarView extends StatelessWidget {
   const SidebarView({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      const Column(children: [AppBar(), Flexible(child: ClustersListView()), CurrentCategoryView()]);
+  Widget build(BuildContext context) => const Column(
+    children: [
+      AppBar(),
+      Flexible(child: ClustersListView()),
+      CurrentCategoryView(),
+    ],
+  );
 }

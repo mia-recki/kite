@@ -24,7 +24,12 @@ class Cluster extends Content {
   Section? getSection(String name) => sections.where((s) => s.name == name).singleOrNull;
 
   Map<Domain, List<Article>> get articlesByDomain => Map.fromEntries(
-    domains.map((domain) => MapEntry(domain, articles.where((article) => article.domain == domain.name).toList())),
+    domains.map(
+      (domain) => MapEntry(
+        domain,
+        articles.where((article) => article.domain == domain.name).toList(),
+      ),
+    ),
   );
 }
 

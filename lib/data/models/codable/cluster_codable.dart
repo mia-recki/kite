@@ -79,15 +79,14 @@ class ClusterCodable {
   static Iterable<Perspective> _decodePerspectives(List<dynamic> perspectives) sync* {
     for (final perspective in perspectives) {
       if (perspective case {'text': final String text, 'sources': final List<dynamic> sources}) {
-        final sourceList =
-            sources
-                .map((source) {
-                  if (source case {'name': final String name, 'url': final String url}) {
-                    return (name: name, url: url);
-                  }
-                })
-                .nonNulls
-                .toList();
+        final sourceList = sources
+            .map((source) {
+              if (source case {'name': final String name, 'url': final String url}) {
+                return (name: name, url: url);
+              }
+            })
+            .nonNulls
+            .toList();
         yield Perspective(text, sourceList);
       }
     }

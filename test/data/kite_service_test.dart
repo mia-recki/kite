@@ -89,7 +89,10 @@ void main() {
             result = await sut.getCategoryContentFor(category);
           });
 
-          test('then clusters are fetched from the api', () => verify(apiClient.getCategoryContent(category.file)).called(1));
+          test(
+            'then clusters are fetched from the api',
+            () => verify(apiClient.getCategoryContent(category.file)).called(1),
+          );
 
           test('then null is returned', () => expect(result, isNull));
         });

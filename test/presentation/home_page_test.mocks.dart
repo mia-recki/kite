@@ -23,10 +23,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeValueListenable_0<T> extends _i1.SmartFake
-    implements _i2.ValueListenable<T> {
-  _FakeValueListenable_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+class _FakeValueListenable_0<T> extends _i1.SmartFake implements _i2.ValueListenable<T> {
+  _FakeValueListenable_0(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
 }
 
 /// A class which mocks [KiteViewModel].
@@ -37,32 +35,23 @@ class MockKiteViewModel extends _i1.Mock implements _i3.KiteViewModel {
   _i2.ValueListenable<_i4.Category?> get currentCategory =>
       (super.noSuchMethod(
             Invocation.getter(#currentCategory),
-            returnValue: _FakeValueListenable_0<_i4.Category?>(
-              this,
-              Invocation.getter(#currentCategory),
-            ),
-            returnValueForMissingStub: _FakeValueListenable_0<_i4.Category?>(
-              this,
-              Invocation.getter(#currentCategory),
-            ),
+            returnValue: _FakeValueListenable_0<_i4.Category?>(this, Invocation.getter(#currentCategory)),
+            returnValueForMissingStub: _FakeValueListenable_0<_i4.Category?>(this, Invocation.getter(#currentCategory)),
           )
           as _i2.ValueListenable<_i4.Category?>);
 
   @override
-  _i2.ValueListenable<(_i5.Content?, List<_i5.Content>?)>
-  get currentCategoryContent =>
+  _i2.ValueListenable<(_i5.Content?, List<_i5.Content>?)> get currentCategoryContent =>
       (super.noSuchMethod(
             Invocation.getter(#currentCategoryContent),
-            returnValue:
-                _FakeValueListenable_0<(_i5.Content?, List<_i5.Content>?)>(
-                  this,
-                  Invocation.getter(#currentCategoryContent),
-                ),
-            returnValueForMissingStub:
-                _FakeValueListenable_0<(_i5.Content?, List<_i5.Content>?)>(
-                  this,
-                  Invocation.getter(#currentCategoryContent),
-                ),
+            returnValue: _FakeValueListenable_0<(_i5.Content?, List<_i5.Content>?)>(
+              this,
+              Invocation.getter(#currentCategoryContent),
+            ),
+            returnValueForMissingStub: _FakeValueListenable_0<(_i5.Content?, List<_i5.Content>?)>(
+              this,
+              Invocation.getter(#currentCategoryContent),
+            ),
           )
           as _i2.ValueListenable<(_i5.Content?, List<_i5.Content>?)>);
 
@@ -70,56 +59,36 @@ class MockKiteViewModel extends _i1.Mock implements _i3.KiteViewModel {
   _i2.ValueListenable<bool> get showingCategoriesList =>
       (super.noSuchMethod(
             Invocation.getter(#showingCategoriesList),
-            returnValue: _FakeValueListenable_0<bool>(
-              this,
-              Invocation.getter(#showingCategoriesList),
-            ),
-            returnValueForMissingStub: _FakeValueListenable_0<bool>(
-              this,
-              Invocation.getter(#showingCategoriesList),
-            ),
+            returnValue: _FakeValueListenable_0<bool>(this, Invocation.getter(#showingCategoriesList)),
+            returnValueForMissingStub: _FakeValueListenable_0<bool>(this, Invocation.getter(#showingCategoriesList)),
           )
           as _i2.ValueListenable<bool>);
 
   @override
-  void selectNextCategory() => super.noSuchMethod(
-    Invocation.method(#selectNextCategory, []),
-    returnValueForMissingStub: null,
-  );
+  void selectNextCategory() =>
+      super.noSuchMethod(Invocation.method(#selectNextCategory, []), returnValueForMissingStub: null);
 
   @override
-  void selectPreviousCategory() => super.noSuchMethod(
-    Invocation.method(#selectPreviousCategory, []),
-    returnValueForMissingStub: null,
-  );
+  void selectPreviousCategory() =>
+      super.noSuchMethod(Invocation.method(#selectPreviousCategory, []), returnValueForMissingStub: null);
 
   @override
-  void selectNextCluster() => super.noSuchMethod(
-    Invocation.method(#selectNextCluster, []),
-    returnValueForMissingStub: null,
-  );
+  void selectNextCluster() =>
+      super.noSuchMethod(Invocation.method(#selectNextCluster, []), returnValueForMissingStub: null);
 
   @override
-  void selectPreviousCluster() => super.noSuchMethod(
-    Invocation.method(#selectPreviousCluster, []),
-    returnValueForMissingStub: null,
-  );
+  void selectPreviousCluster() =>
+      super.noSuchMethod(Invocation.method(#selectPreviousCluster, []), returnValueForMissingStub: null);
 
   @override
-  void selectContent(_i5.Content? content) => super.noSuchMethod(
-    Invocation.method(#selectContent, [content]),
-    returnValueForMissingStub: null,
-  );
+  void selectContent(_i5.Content? content) =>
+      super.noSuchMethod(Invocation.method(#selectContent, [content]), returnValueForMissingStub: null);
 
   @override
-  void selectCategory(_i4.Category? category) => super.noSuchMethod(
-    Invocation.method(#selectCategory, [category]),
-    returnValueForMissingStub: null,
-  );
+  void selectCategory(_i4.Category? category) =>
+      super.noSuchMethod(Invocation.method(#selectCategory, [category]), returnValueForMissingStub: null);
 
   @override
-  void toggleCategoriesList() => super.noSuchMethod(
-    Invocation.method(#toggleCategoriesList, []),
-    returnValueForMissingStub: null,
-  );
+  void toggleCategoriesList() =>
+      super.noSuchMethod(Invocation.method(#toggleCategoriesList, []), returnValueForMissingStub: null);
 }

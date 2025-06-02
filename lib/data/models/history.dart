@@ -9,10 +9,17 @@ class History extends Content {
 
   const History(this.items);
 
-  List<HistoryItem> get events =>
-      items.where((i) => i.type == HistoryType.event).sortedBy((e) => e.sortYear).reversed.toList();
-  List<HistoryItem> get people =>
-      items.where((i) => i.type == HistoryType.people).sortedBy((e) => e.sortYear).reversed.toList();
+  List<HistoryItem> get events => items
+      .where((i) => i.type == HistoryType.event) //
+      .sortedBy((e) => e.sortYear)
+      .reversed
+      .toList();
+
+  List<HistoryItem> get people => items
+      .where((i) => i.type == HistoryType.people) //
+      .sortedBy((e) => e.sortYear)
+      .reversed
+      .toList();
 }
 
 class HistoryItem {

@@ -42,18 +42,18 @@ void main() {
       viewModel: viewModel,
       child: KiteThemeWrapper(
         ThemeBrightness.light,
-        builder:
-            (_) => WidgetsApp(
-              color: KiteTheme.white,
-              pageRouteBuilder:
-                  <T>(RouteSettings settings, WidgetBuilder builder) => PageRouteBuilder<T>(
-                    settings: settings,
-                    pageBuilder:
-                        (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
-                            builder(context),
-                  ),
-              home: MediaQuery(data: MediaQueryData(size: screenSize), child: const HomePage()),
-            ),
+        builder: (_) => WidgetsApp(
+          color: KiteTheme.white,
+          pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) => PageRouteBuilder<T>(
+            settings: settings,
+            pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
+                builder(context),
+          ),
+          home: MediaQuery(
+            data: MediaQueryData(size: screenSize),
+            child: const HomePage(),
+          ),
+        ),
       ),
     );
   }
