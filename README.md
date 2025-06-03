@@ -44,7 +44,6 @@ demonstrates interacting with the app via keyboard (keystrokes are displayed in 
     - caching most recent data for offline consumption
 - more informative error messages: currently, there's really nothing a user can do when an api call fails, except try try again
 - fancy animations (e.g., for page transitions) 
-- custom app icon
 
 ## Next steps
 - Customization

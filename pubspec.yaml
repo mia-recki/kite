@@ -20,6 +20,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.14.3"
   flutter_lints: ^5.0.0
   mockito: ^5.4.5
   build_runner: ^2.4.15
@@ -30,4 +31,16 @@ flutter:
     - assets/img/kite-dark.svg
     - assets/img/dark-theme.svg
     - assets/img/image-placeholder.svg
+    - assets/img/kite.png
+
+
+flutter_launcher_icons:
+  image_path: "assets/img/kite.png"
+  android: true
+  ios: true
+  web:
+    generate: true
+    theme_color: "#F3B644"
+  macos:
+    generate: true
 
