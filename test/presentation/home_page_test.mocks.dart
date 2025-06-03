@@ -35,8 +35,14 @@ class MockKiteViewModel extends _i1.Mock implements _i3.KiteViewModel {
   _i2.ValueListenable<_i4.Category?> get currentCategory =>
       (super.noSuchMethod(
             Invocation.getter(#currentCategory),
-            returnValue: _FakeValueListenable_0<_i4.Category?>(this, Invocation.getter(#currentCategory)),
-            returnValueForMissingStub: _FakeValueListenable_0<_i4.Category?>(this, Invocation.getter(#currentCategory)),
+            returnValue: _FakeValueListenable_0<_i4.Category?>(
+              this,
+              Invocation.getter(#currentCategory),
+            ),
+            returnValueForMissingStub: _FakeValueListenable_0<_i4.Category?>(
+              this,
+              Invocation.getter(#currentCategory),
+            ),
           )
           as _i2.ValueListenable<_i4.Category?>);
 
@@ -56,39 +62,65 @@ class MockKiteViewModel extends _i1.Mock implements _i3.KiteViewModel {
           as _i2.ValueListenable<(_i5.Content?, List<_i5.Content>?)>);
 
   @override
-  _i2.ValueListenable<bool> get showingCategoriesList =>
+  _i2.ValueListenable<_i3.PopupType> get popupType =>
       (super.noSuchMethod(
-            Invocation.getter(#showingCategoriesList),
-            returnValue: _FakeValueListenable_0<bool>(this, Invocation.getter(#showingCategoriesList)),
-            returnValueForMissingStub: _FakeValueListenable_0<bool>(this, Invocation.getter(#showingCategoriesList)),
+            Invocation.getter(#popupType),
+            returnValue: _FakeValueListenable_0<_i3.PopupType>(
+              this,
+              Invocation.getter(#popupType),
+            ),
+            returnValueForMissingStub: _FakeValueListenable_0<_i3.PopupType>(
+              this,
+              Invocation.getter(#popupType),
+            ),
           )
-          as _i2.ValueListenable<bool>);
+          as _i2.ValueListenable<_i3.PopupType>);
 
   @override
-  void selectNextCategory() =>
-      super.noSuchMethod(Invocation.method(#selectNextCategory, []), returnValueForMissingStub: null);
+  void selectNextCategory() => super.noSuchMethod(
+    Invocation.method(#selectNextCategory, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void selectPreviousCategory() =>
-      super.noSuchMethod(Invocation.method(#selectPreviousCategory, []), returnValueForMissingStub: null);
+  void selectPreviousCategory() => super.noSuchMethod(
+    Invocation.method(#selectPreviousCategory, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void selectNextCluster() =>
-      super.noSuchMethod(Invocation.method(#selectNextCluster, []), returnValueForMissingStub: null);
+  void selectNextCluster() => super.noSuchMethod(
+    Invocation.method(#selectNextCluster, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void selectPreviousCluster() =>
-      super.noSuchMethod(Invocation.method(#selectPreviousCluster, []), returnValueForMissingStub: null);
+  void selectPreviousCluster() => super.noSuchMethod(
+    Invocation.method(#selectPreviousCluster, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void selectContent(_i5.Content? content) =>
-      super.noSuchMethod(Invocation.method(#selectContent, [content]), returnValueForMissingStub: null);
+  void selectContent(_i5.Content? content) => super.noSuchMethod(
+    Invocation.method(#selectContent, [content]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void selectCategory(_i4.Category? category) =>
-      super.noSuchMethod(Invocation.method(#selectCategory, [category]), returnValueForMissingStub: null);
+  void selectCategory(_i4.Category? category) => super.noSuchMethod(
+    Invocation.method(#selectCategory, [category]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void toggleCategoriesList() =>
-      super.noSuchMethod(Invocation.method(#toggleCategoriesList, []), returnValueForMissingStub: null);
+  void toggleCategoriesList() => super.noSuchMethod(
+    Invocation.method(#toggleCategoriesList, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void toggleHelp() => super.noSuchMethod(
+    Invocation.method(#toggleHelp, []),
+    returnValueForMissingStub: null,
+  );
 }

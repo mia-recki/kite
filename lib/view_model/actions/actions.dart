@@ -88,3 +88,13 @@ class ShowCategoriesListAction extends _KiteAction<ToggleCategoriesListIntent> {
     return null;
   }
 }
+
+class ToggleKeybindingsHelpAction extends _KiteAction<ToggleKeybindingsHelpIntent> {
+  ToggleKeybindingsHelpAction(super.viewModel);
+
+  @override
+  Object? invoke(Intent intent) {
+    viewModel.toggleHelp();
+    return null;
+  }
+}

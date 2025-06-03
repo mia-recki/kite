@@ -43,8 +43,10 @@ class MockKiteService extends _i1.Mock implements _i2.KiteService {
           as _i3.ValueGetter<DateTime>);
 
   @override
-  set currentTime(_i3.ValueGetter<DateTime>? _currentTime) =>
-      super.noSuchMethod(Invocation.setter(#currentTime, _currentTime), returnValueForMissingStub: null);
+  set currentTime(_i3.ValueGetter<DateTime>? _currentTime) => super.noSuchMethod(
+    Invocation.setter(#currentTime, _currentTime),
+    returnValueForMissingStub: null,
+  );
 
   @override
   _i4.Future<List<_i5.Category>?> getCategories() =>
@@ -56,7 +58,9 @@ class MockKiteService extends _i1.Mock implements _i2.KiteService {
           as _i4.Future<List<_i5.Category>?>);
 
   @override
-  _i4.Future<List<_i6.Content>?> getCategoryContentFor(_i5.Category? category) =>
+  _i4.Future<List<_i6.Content>?> getCategoryContentFor(
+    _i5.Category? category,
+  ) =>
       (super.noSuchMethod(
             Invocation.method(#getCategoryContentFor, [category]),
             returnValue: _i4.Future<List<_i6.Content>?>.value(),

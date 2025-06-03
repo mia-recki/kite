@@ -33,23 +33,37 @@ class MockApiClient extends _i1.Mock implements _i2.ApiClient {
       (super.noSuchMethod(
             Invocation.method(#getCategories, []),
             returnValue: _i3.Future<_i4.Result<Map<String, Object?>>>.value(
-              _i5.dummyValue<_i4.Result<Map<String, Object?>>>(this, Invocation.method(#getCategories, [])),
+              _i5.dummyValue<_i4.Result<Map<String, Object?>>>(
+                this,
+                Invocation.method(#getCategories, []),
+              ),
             ),
             returnValueForMissingStub: _i3.Future<_i4.Result<Map<String, Object?>>>.value(
-              _i5.dummyValue<_i4.Result<Map<String, Object?>>>(this, Invocation.method(#getCategories, [])),
+              _i5.dummyValue<_i4.Result<Map<String, Object?>>>(
+                this,
+                Invocation.method(#getCategories, []),
+              ),
             ),
           )
           as _i3.Future<_i4.Result<Map<String, Object?>>>);
 
   @override
-  _i3.Future<_i4.Result<Map<String, Object?>>> getCategoryContent(String? file) =>
+  _i3.Future<_i4.Result<Map<String, Object?>>> getCategoryContent(
+    String? file,
+  ) =>
       (super.noSuchMethod(
             Invocation.method(#getCategoryContent, [file]),
             returnValue: _i3.Future<_i4.Result<Map<String, Object?>>>.value(
-              _i5.dummyValue<_i4.Result<Map<String, Object?>>>(this, Invocation.method(#getCategoryContent, [file])),
+              _i5.dummyValue<_i4.Result<Map<String, Object?>>>(
+                this,
+                Invocation.method(#getCategoryContent, [file]),
+              ),
             ),
             returnValueForMissingStub: _i3.Future<_i4.Result<Map<String, Object?>>>.value(
-              _i5.dummyValue<_i4.Result<Map<String, Object?>>>(this, Invocation.method(#getCategoryContent, [file])),
+              _i5.dummyValue<_i4.Result<Map<String, Object?>>>(
+                this,
+                Invocation.method(#getCategoryContent, [file]),
+              ),
             ),
           )
           as _i3.Future<_i4.Result<Map<String, Object?>>>);

@@ -13,6 +13,7 @@ import '../view_model/kite_view_model.dart';
 import '../view_model/provider/kite_provider.dart';
 import 'categories_search_view.dart';
 import 'content_view.dart';
+import 'keybindings_help.dart';
 import 'sidebar/sidebar_view.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,8 +25,8 @@ class HomePage extends StatelessWidget {
     return ColoredBox(
       color: theme.background,
       child: ValueListenableBuilder(
-        valueListenable: KiteProvider.of<KiteViewModel>(context).showingCategoriesList,
-        builder: (context, isShowingCategoriesList, _) => Stack(
+        valueListenable: KiteProvider.of<KiteViewModel>(context).popupType,
+        builder: (context, popupType, _) => Stack(
           alignment: Alignment.center,
           children: [
             LayoutBuilder(
@@ -61,8 +62,11 @@ class HomePage extends StatelessWidget {
                 ),
               },
             ),
-            if (isShowingCategoriesList)
-              Positioned(
+
+            if (popupType != PopupType.none) const ColoredBox(color: Color(0x80000000), child: SizedBox.expand()),
+            switch (popupType) {
+              PopupType.none => const SizedBox.shrink(),
+              PopupType.categoriesList => Positioned(
                 width: min(MediaQuery.sizeOf(context).shortestSide, screenSizeBreakpoint),
                 bottom: switch (MediaQuery.viewInsetsOf(context).bottom) {
                   final softKeyboardHeight when softKeyboardHeight > 0 => softKeyboardHeight,
@@ -79,6 +83,11 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+              PopupType.help => Dialog(
+                onClose: () => Actions.invoke(context, const ToggleKeybindingsHelpIntent()),
+                child: const KeybindingsHelpView(),
+              ),
+            },
           ],
         ),
       ),

@@ -24,6 +24,7 @@ Rationale for focusing on these features is that power users (which are most lik
 | arrow `Up`/`Down` | Scroll up/down in a cluster |
 | `g` | Scroll to top of a cluster |
 | `G` (`shift-g`) | Scroll to bottom of a cluster |
+| `?` | Toggle keybindings help |
 
 ## Demo
 

@@ -31,6 +31,15 @@ class AppBar extends StatelessWidget {
               ),
             ),
           ),
+          GestureDetector(
+            onTap: Actions.handler(context, const ToggleKeybindingsHelpIntent()),
+            behavior: HitTestBehavior.opaque,
+            child: const Text(
+              '?',
+              style: TextStyle(fontSize: 24),
+              semanticsLabel: 'Show keybindings list',
+            ),
+          ),
         ],
       ),
     );

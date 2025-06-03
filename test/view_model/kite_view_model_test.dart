@@ -125,21 +125,45 @@ void main() {
     });
 
     test('toggleCategoriesList toggles visibility', () {
-      expect(viewModel.showingCategoriesList.value, isFalse);
+      expect(viewModel.popupType.value, PopupType.none);
 
       viewModel.toggleCategoriesList();
-      expect(viewModel.showingCategoriesList.value, isTrue);
+      expect(viewModel.popupType.value, PopupType.categoriesList);
 
       viewModel.toggleCategoriesList();
-      expect(viewModel.showingCategoriesList.value, isFalse);
+      expect(viewModel.popupType.value, PopupType.none);
     });
 
     test('selecting category hides categories list', () {
       viewModel.toggleCategoriesList();
-      expect(viewModel.showingCategoriesList.value, isTrue);
+      expect(viewModel.popupType.value, PopupType.categoriesList);
 
       viewModel.selectCategory(testCategories[1]);
-      expect(viewModel.showingCategoriesList.value, isFalse);
+      expect(viewModel.popupType.value, PopupType.none);
+    });
+  });
+
+  group('keybindings help visibility', () {
+    setUp(() {
+      viewModel = KiteViewModel(mockService);
+    });
+
+    test('toggleHelp toggles visibility', () {
+      expect(viewModel.popupType.value, PopupType.none);
+
+      viewModel.toggleHelp();
+      expect(viewModel.popupType.value, PopupType.help);
+
+      viewModel.toggleHelp();
+      expect(viewModel.popupType.value, PopupType.none);
+    });
+
+    test('searching for categories hides help', () {
+      viewModel.toggleHelp();
+      expect(viewModel.popupType.value, PopupType.help);
+
+      viewModel.selectCategory(testCategories[1]);
+      expect(viewModel.popupType.value, PopupType.none);
     });
   });
 }

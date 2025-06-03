@@ -19,11 +19,11 @@ class KiteViewModel {
   ValueListenable<Category?> get currentCategory => _currentCategory;
   ValueListenable<(Content? currentCluster, List<Content>? clusters)> get currentCategoryContent =>
       _currentCategoryContent;
-  ValueListenable<bool> get showingCategoriesList => _showingCategoriesList;
+  ValueListenable<PopupType> get popupType => _popupType;
 
   final _currentCategory = ValueNotifier<Category?>(null);
   final _currentCategoryContent = ValueNotifier<(Content?, List<Content>?)>((null, null));
-  final _showingCategoriesList = ValueNotifier(false);
+  final _popupType = ValueNotifier(PopupType.none);
 
   Future<void> _fetchContentFor(Category category) async {
     final newContent = (await _service.getCategoryContentFor(category)) ?? [];
@@ -67,10 +67,25 @@ class KiteViewModel {
   void selectCategory(Category category) {
     if (_currentCategory.value == category) return;
 
-    _showingCategoriesList.value = false;
+    _popupType.value = PopupType.none;
+
     _currentCategory.value = category;
     _fetchContentFor(category);
   }
 
-  void toggleCategoriesList() => _showingCategoriesList.value = !_showingCategoriesList.value;
+  void toggleCategoriesList() {
+    _popupType.value = _popupType.value.toggle(PopupType.categoriesList);
+  }
+
+  void toggleHelp() {
+    _popupType.value = _popupType.value.toggle(PopupType.help);
+  }
+}
+
+enum PopupType {
+  none,
+  categoriesList,
+  help;
+
+  PopupType toggle(PopupType type) => type == this ? none : type;
 }

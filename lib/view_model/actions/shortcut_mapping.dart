@@ -22,6 +22,7 @@ const appLevelShortcuts = {
   SingleActivator(LogicalKeyboardKey.arrowDown): ScrollDownIntent(),
   SingleActivator(LogicalKeyboardKey.keyG): ScrollToTopIntent(),
   SingleActivator(LogicalKeyboardKey.keyG, shift: true): ScrollToBottomIntent(),
+  CharacterActivator('?'): ToggleKeybindingsHelpIntent(),
 
   if (kDebugMode) SingleActivator(LogicalKeyboardKey.keyD): DebugIntent(),
 };
@@ -39,6 +40,7 @@ Map<Type, Action> appLevelActions(BuildContext context) {
     SelectContentIntent: SelectContentAction(viewModel),
     GoBackIntent: DeselectClusterAction(viewModel),
     ToggleThemeIntent: CallbackAction<ToggleThemeIntent>(onInvoke: (intent) => KiteTheme.toggleTheme(context)),
+    ToggleKeybindingsHelpIntent: ToggleKeybindingsHelpAction(viewModel),
 
     if (kDebugMode)
       DebugIntent: CallbackAction(

@@ -7,6 +7,7 @@ import 'package:kite/presentation/categories_search_view.dart';
 import 'package:kite/presentation/cluster/cluster_view.dart';
 import 'package:kite/presentation/history/history_view.dart';
 import 'package:kite/presentation/home_page.dart';
+import 'package:kite/presentation/keybindings_help.dart';
 import 'package:kite/presentation/sidebar/sidebar_view.dart';
 import 'package:kite/theme/components/dialog.dart';
 import 'package:kite/theme/components/kite_logo.dart';
@@ -64,7 +65,7 @@ void main() {
     viewModel = MockKiteViewModel();
 
     when(viewModel.currentCategoryContent).thenReturn(ValueNotifier((null, [testCluster])));
-    when(viewModel.showingCategoriesList).thenReturn(ValueNotifier(false));
+    when(viewModel.popupType).thenReturn(ValueNotifier(PopupType.none));
     when(viewModel.currentCategory).thenReturn(ValueNotifier(testCategories.first));
   });
 
@@ -110,9 +111,11 @@ void main() {
 
   group('Categories List Dialog Tests', () {
     setUp(() {
-      final notifier = ValueNotifier(false);
-      when(viewModel.showingCategoriesList).thenReturn(notifier);
-      when(viewModel.toggleCategoriesList()).thenAnswer((_) => notifier.value = !notifier.value);
+      final notifier = ValueNotifier(PopupType.none);
+      when(viewModel.popupType).thenReturn(notifier);
+      when(viewModel.toggleCategoriesList()).thenAnswer(
+        (_) => notifier.value = notifier.value.toggle(PopupType.categoriesList),
+      );
     });
 
     testWidgets('shows categories list dialog when toggled', (tester) async {
@@ -144,6 +147,47 @@ void main() {
       viewModel.toggleCategoriesList();
       await tester.pumpAndSettle();
       expect(find.byType(CategoriesSearchView), findsNothing);
+    });
+  });
+
+  group('KeybindingsHelpView', () {
+    setUp(() {
+      final notifier = ValueNotifier(PopupType.none);
+      when(viewModel.popupType).thenReturn(notifier);
+      when(viewModel.toggleHelp()).thenAnswer(
+        (_) => notifier.value = notifier.value.toggle(PopupType.help),
+      );
+    });
+
+    testWidgets('shows help dialog when toggled', (tester) async {
+      await tester.pumpWidget(createHomePageWithDependencies(screenSize: const Size(800, 600)));
+      await tester.pumpAndSettle();
+
+      // Initially, dialog should not be visible
+      expect(find.byType(KeybindingsHelpView), findsNothing);
+
+      // Toggle help
+      viewModel.toggleHelp();
+      await tester.pumpAndSettle();
+
+      // Dialog should now be visible
+      expect(find.byType(KeybindingsHelpView), findsOneWidget);
+      expect(find.byType(Dialog), findsOneWidget);
+    });
+
+    testWidgets('hides help dialog when toggled off', (tester) async {
+      await tester.pumpWidget(createHomePageWithDependencies(screenSize: const Size(800, 600)));
+      await tester.pumpAndSettle();
+
+      // Show dialog
+      viewModel.toggleHelp();
+      await tester.pumpAndSettle();
+      expect(find.byType(KeybindingsHelpView), findsOneWidget);
+
+      // Hide dialog
+      viewModel.toggleHelp();
+      await tester.pumpAndSettle();
+      expect(find.byType(KeybindingsHelpView), findsNothing);
     });
   });
 

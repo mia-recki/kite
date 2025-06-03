@@ -66,3 +66,7 @@ class ScrollToTopIntent extends Intent {
 class ScrollToBottomIntent extends Intent {
   const ScrollToBottomIntent();
 }
+
+class ToggleKeybindingsHelpIntent extends Intent {
+  const ToggleKeybindingsHelpIntent();
+}

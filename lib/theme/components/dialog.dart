@@ -22,12 +22,10 @@ class Dialog extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Row(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(child: child),
-              Align(
-                alignment: Alignment.topRight,
-                child: Button(onTap: onClose, text: '\u2715', semanticsLabel: 'Close dialog'),
-              ),
+              Button(onTap: onClose, text: '\u2715', semanticsLabel: 'Close dialog'),
             ],
           ),
         ),
