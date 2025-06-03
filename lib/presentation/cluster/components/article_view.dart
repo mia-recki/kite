@@ -54,7 +54,7 @@ class ArticleView extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                              webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
                             ),
                             Positioned(
                               bottom: 8,

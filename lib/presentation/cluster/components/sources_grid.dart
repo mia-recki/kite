@@ -48,7 +48,7 @@ class _SourceView extends StatelessWidget {
                       domain.favicon,
                       width: 16,
                       height: 16,
-                      webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+                      webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
                     ),
                   Flexible(child: Text(domain.name)),
                 ],
